@@ -25,7 +25,9 @@ and what you should write is the favNum function that makes the code above work,
 
 
   //Code Here for first
-  
+function first(names, callback) {
+  callback(names[0]);
+}
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
   console.log('The first name in names is ', firstName)
@@ -39,7 +41,9 @@ first(names, function(firstName){
 
 
   //Code Here for last
-
+function last(names, inputFunc) {
+  inputFunc(names[names.length - 1]);
+}
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 last(names, function(lastName){
   console.log('The last name in names is ', lastName);
@@ -57,10 +61,12 @@ last(names, function(lastName){
 
 
   //Code Here for multiply
-
+function multiply(x, y, func) {
+  func(x * y);
+}
 multiply(4, 3, function(answer){
   console.log('The answer is ', answer); //should console.log 12
-})
+});
 
 
 
@@ -73,7 +79,14 @@ multiply(4, 3, function(answer){
 
 
   //Code Here for contains
-
+function contains(arry, find, inputFunc) {
+  for (var i =0; i < arry.length; i++) {
+    if (arry[i] === find) {
+      result = true;
+    }
+  }
+  inputFunc(result);
+}
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -93,7 +106,22 @@ contains(names, 'Colt', function(result){
 
 
     //Code Here for uniq
-
+function uniq(arr, inputFunc) {
+  var i, j, cur, found;
+  for (i = arr.length - 1; i >= 0; i--) {
+      cur = arr[i];
+      found = false;
+      for (j = i - 1; !found && j >= 0; j--) {
+          if (cur === arr[j]) {
+              if (i !== j) {
+                  arr.splice(i, 1);
+              }
+              found = true;
+          }
+      }
+  }
+  inputFunc(arr);
+}
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
@@ -109,6 +137,11 @@ uniq(names, function(uniqArr){
 
 
     //Code Here for each
+function each(arry, inputFunc) {
+  for (var i = 0; i < arry.length; i++) {
+    inputFunc(arry[i], i);
+  }
+}
 
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 each(names, function(item, indice){
@@ -126,7 +159,13 @@ each(names, function(item, indice){
 
 
  //code here for getUserById
-
+function getUserById(users, id, inputFunc) {
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].id === id) {
+      inputFunc(users[i])
+    }
+  }
+}
 var users = [
   {
     id: '12d',
